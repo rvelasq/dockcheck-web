@@ -4,6 +4,7 @@ CRON_LOG=/var/log/cron.log
 
 [ "$DEBUG" = "true" ] && echo "DEBUG: $0 dockcheck starting" 
 
+export PATH=$PATH:/root/.local/pipx/venvs/apprise/bin/
 
 # temporary file to signal that update is running.
 # either via manual trigger or cron.
