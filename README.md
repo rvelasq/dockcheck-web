@@ -98,6 +98,10 @@ services:
 
 ## Versions
 
+### 1.3.1
+
+- fix 'apprise not found' error
+
 ### 1.3.0
 
 - update to dockcheck 0.5.8.0
