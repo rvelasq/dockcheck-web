@@ -16,13 +16,6 @@ if [ "$NOTIFY" = "true" ]; then
     [ -n "$NOTIFY_URLS" ] && echo "* notifications activated"
 fi
 
-if [ "$CHECK_ON_LAUNCH" = "true" ]; then
-    echo "* running dockcheck"
-    run-parts /etc/cron.daily/
-else
-    echo "* skipping dockcheck on launch"
-fi
-
 echo "* setting up web app"
 chown www-data:www-data /var/www/html/*
 chown www-data:www-data /data
@@ -49,6 +42,13 @@ fi
 
 echo "* running watcher"
 /app/watcher.sh & #</dev/null >/dev/null 2>&1 &
+
+if [ "$CHECK_ON_LAUNCH" = "true" ]; then
+    echo "* running launch-time dockcheck"
+    run-parts /etc/cron.custom/ &
+else
+    echo "* skipping dockcheck on launch"
+fi
 
 echo "* starting web server"
 if [ "$SILENCE_APACHE_LOGS" = "true" ]; then
