@@ -1,11 +1,11 @@
-version: '3.2'
+# version: "3.2"
 services:
   dockcheck-web:
     container_name: dockcheck-web
-    image: 'ghcr.io/supermamon/dockcheck-web:local'
+    image: "ghcr.io/rvelasq/dockcheck-web:latest"
     restart: unless-stopped
     ports:
-      - '8401:80'
+      - "8401:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro

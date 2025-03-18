@@ -1,6 +1,5 @@
 .DS_Store
 bulma.min.css
 data/
-docker-compose.yml
 build-test.sh
 app/ENV
