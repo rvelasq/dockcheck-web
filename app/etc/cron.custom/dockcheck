@@ -4,7 +4,7 @@ CRON_LOG=/var/log/cron.log
 
 [ "$DEBUG" = "true" ] && echo "DEBUG: $0 dockcheck starting" 
 
-export PATH=$PATH:/root/.local/pipx/venvs/apprise/bin/
+#export PATH=$PATH:/root/.local/pipx/venvs/apprise/bin/
 
 # temporary file to signal that update is running.
 # either via manual trigger or cron.
@@ -60,15 +60,16 @@ if [ "$NOTIFY" = "true" ]; then
             [ "$DEBUG" = "true" ] && echo "DEBUG: $0 notifymsg = $notifymsg" 
 
             if [ "$DEBUG" = "true" ]; then            
-                apprise -vvvv -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
+                /root/.local/pipx/venvs/apprise/bin/apprise -vvvv -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
             else
-                apprise -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
+                /root/.local/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
             fi
             rm /app/notifymsg
 
             echo "* $0 notification sent"
         else
             echo "* $0 nothing to notify about" 
+            [ "$DEBUG" = "true" ] && /root/.local/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "DEBUG: nothing to notify about" "$NOTIFY_URLS"
         fi
     else 
         echo "* $0 notification method not provided" 

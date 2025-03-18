@@ -2,22 +2,24 @@
 services:
   dockcheck-web:
     container_name: dockcheck-web
-    image: "ghcr.io/rvelasq/dockcheck-web:latest"
+    image: "ghcr.io/rvelasq/dockcheck-web:latest-arm64v8"
     restart: unless-stopped
     ports:
       - "8401:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
+      # - $HOME/.docker/config.json:/root/.docker/config.json:ro
       - ./data:/data
     environment:
       - NOTIFY=true
-      - NOTIFY_URLS=slack://sometoken1/sometoken2/sometoken3
+      # - NOTIFY_URLS=slack://sometoken1/sometoken2/sometoken3
+      - NOTIFY_URLS=jsons://wf.lynks.cc/hooks/dockcheck
       - EXCLUDE=nginx
       - PAGE_TITLE=Dockcheck
       - WINDOW_TITLE=Dockcheck
       - CHECK_ON_LAUNCH=true
       - TZ=Europe/London
-      - DEBUG=false
+      - DEBUG=true
       - SILENCE_APACHE_LOGS=true
       - SCHEDULE=0 0 * * *
