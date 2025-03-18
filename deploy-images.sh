@@ -5,7 +5,7 @@ if [ -z "$3" ]; then
     exit 1
 fi;
 
-GITHUB_USER=supermamon
+GITHUB_USER=rvelasq
 
 echo "* logging in"
 echo $CR_PAT | docker login ghcr.io -u $GITHUB_USER --password-stdin
