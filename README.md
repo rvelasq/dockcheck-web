@@ -23,7 +23,6 @@ docker-compose.yml
 ```yml
 services:
   dockcheck-web:
-    container_name: dockcheck-web
     image: "ghcr.io/rvelasq/dockcheck-web:latest"
     restart: unless-stopped
     ports:
@@ -97,6 +96,15 @@ services:
 ```
 
 ## Versions
+
+### 1.4.0
+
+- update to dockcheck 0.7.7
+- build improvements
+
+### 1.3.2
+
+- fix: apprise command not found (for real this time)
 
 ### 1.3.1
 

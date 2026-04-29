@@ -29,10 +29,10 @@ source /app/ENV
 echo "* $0 checking for updates"
 if [ ! -z "$EXCLUDE" ]; then
     [ "$DEBUG" = "true" ] && echo "DEBUG: $0 running dockcheck with exclusions" 
-    /app/dockcheck.sh -e $EXCLUDE | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
+    /app/dockcheck.sh -n -e $EXCLUDE | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
 else
     [ "$DEBUG" = "true" ] && echo "DEBUG: $0 running dockcheck without exclusions" 
-    /app/dockcheck.sh | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
+    /app/dockcheck.sh -n | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
 fi
 
 cp /data/~containers /data/containers

@@ -2,7 +2,7 @@
 services:
   dockcheck-web:
     container_name: dockcheck-web
-    image: "ghcr.io/rvelasq/dockcheck-web:latest-arm64v8"
+    image: "ghcr.io/rvelasq/dockcheck-web:latest"
     restart: unless-stopped
     ports:
       - "8401:80"
@@ -13,8 +13,7 @@ services:
       - ./data:/data
     environment:
       - NOTIFY=true
-      # - NOTIFY_URLS=slack://sometoken1/sometoken2/sometoken3
-      - NOTIFY_URLS=jsons://wf.lynks.cc/hooks/dockcheck
+      - NOTIFY_URLS=slack://sometoken1/sometoken2/sometoken3
       - EXCLUDE=nginx
       - PAGE_TITLE=Dockcheck
       - WINDOW_TITLE=Dockcheck
