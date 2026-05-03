@@ -29,10 +29,10 @@ source /app/ENV
 echo "* $0 checking for updates"
 if [ ! -z "$EXCLUDE" ]; then
     [ "$DEBUG" = "true" ] && echo "DEBUG: $0 running dockcheck with exclusions" 
-    /app/dockcheck.sh -n -e $EXCLUDE | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
+    /app/dockcheck.sh -n -m -e $EXCLUDE | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
 else
     [ "$DEBUG" = "true" ] && echo "DEBUG: $0 running dockcheck without exclusions" 
-    /app/dockcheck.sh -n | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
+    /app/dockcheck.sh -n -m | sed -r "s:\x1B\[[0-9;]*[mK]::g" > /data/~containers
 fi
 
 cp /data/~containers /data/containers
@@ -60,16 +60,16 @@ if [ "$NOTIFY" = "true" ]; then
             [ "$DEBUG" = "true" ] && echo "DEBUG: $0 notifymsg = $notifymsg" 
 
             if [ "$DEBUG" = "true" ]; then            
-                /root/.local/pipx/venvs/apprise/bin/apprise -vvvv -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
+                /root/.local/share/pipx/venvs/apprise/bin/apprise -vvvv -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
             else
-                /root/.local/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
+                /root/.local/share/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "$notifymsg" "$NOTIFY_URLS"
             fi
             rm /app/notifymsg
 
             echo "* $0 notification sent"
         else
             echo "* $0 nothing to notify about" 
-            [ "$DEBUG" = "true" ] && /root/.local/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "DEBUG: nothing to notify about" "$NOTIFY_URLS"
+            [ "$DEBUG" = "true" ] && /root/.local/share/pipx/venvs/apprise/bin/apprise -t "Dockcheck-web updates on $(hostname)" -b "DEBUG: nothing to notify about" "$NOTIFY_URLS"
         fi
     else 
         echo "* $0 notification method not provided" 
